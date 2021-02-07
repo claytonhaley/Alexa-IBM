@@ -1,0 +1,295 @@
+{
+  "intents": [
+    {
+      "intent": "End",
+      "examples": [
+        {
+          "text": "Done"
+        },
+        {
+          "text": "Goodbye"
+        },
+        {
+          "text": "I'm finished"
+        },
+        {
+          "text": "Thanks"
+        },
+        {
+          "text": "Thank you"
+        }
+      ],
+      "description": "Quits Program"
+    },
+    {
+      "intent": "GetClassName",
+      "examples": [
+        {
+          "text": "Class"
+        },
+        {
+          "text": "Class name"
+        },
+        {
+          "text": "My class"
+        },
+        {
+          "text": "The class name"
+        },
+        {
+          "text": "This class"
+        },
+        {
+          "text": "What is my class"
+        },
+        {
+          "text": "What is this class?"
+        }
+      ],
+      "description": "Class Name"
+    },
+    {
+      "intent": "GetGroupNames",
+      "examples": [
+        {
+          "text": "Group members"
+        },
+        {
+          "text": "My group"
+        },
+        {
+          "text": "Team members"
+        },
+        {
+          "text": "Who are my team members?"
+        },
+        {
+          "text": "Who is in my group?"
+        },
+        {
+          "text": "Who is my group?"
+        },
+        {
+          "text": "Who is my team?"
+        },
+        {
+          "text": "Who is on my team?"
+        }
+      ],
+      "description": "Group members"
+    },
+    {
+      "intent": "GetProfessorName",
+      "examples": [
+        {
+          "text": "My professor?"
+        },
+        {
+          "text": "Professor"
+        },
+        {
+          "text": "Professor's name"
+        },
+        {
+          "text": "Teacher"
+        },
+        {
+          "text": "What is the professor's name?"
+        },
+        {
+          "text": "Who is my professor?"
+        },
+        {
+          "text": "Who is the professor?"
+        },
+        {
+          "text": "Who teaches this class?"
+        }
+      ],
+      "description": "Professor's Name"
+    },
+    {
+      "intent": "Welcome",
+      "examples": [
+        {
+          "text": "Hello"
+        },
+        {
+          "text": "help"
+        },
+        {
+          "text": "Hey"
+        },
+        {
+          "text": "Hi"
+        },
+        {
+          "text": "How are you"
+        },
+        {
+          "text": "I need some help"
+        },
+        {
+          "text": "I want to know about my class"
+        }
+      ],
+      "description": "Restart bot or current flow."
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-date",
+      "values": []
+    },
+    {
+      "entity": "sys-time",
+      "values": []
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_28_1530313135395",
+      "context": {
+        "greeted": "$greeted"
+      },
+      "metadata": {},
+      "conditions": "$greeted",
+      "event_name": "input",
+      "dialog_node": "handler_29_1530313135395"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "text": "Hello. This is Watson. What's  your name?"
+      },
+      "parent": "slot_28_1530313135395",
+      "event_name": "focus",
+      "dialog_node": "handler_30_1530313135395",
+      "previous_sibling": "handler_29_1530313135395"
+    },
+    {
+      "type": "folder",
+      "title": "Digress and return",
+      "metadata": {},
+      "digress_in": "returns",
+      "dialog_node": "node_1_1532048605911",
+      "previous_sibling": "node_46_1530315654027"
+    },
+    {
+      "type": "standard",
+      "title": "GetClassName",
+      "output": {
+        "text": {
+          "values": [
+            "The name of this class is Cloud Computing. The course ID is COMP 5530."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "parent": "node_1_1532048605911",
+      "metadata": {},
+      "conditions": "#GetClassName",
+      "dialog_node": "node_2_1532048731678",
+      "digress_out": "allow_all"
+    },
+    {
+      "type": "standard",
+      "title": "GetGroupNames",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "The Team Members of Cloud Computing Group 7 are Noah, Sarthak, Sam, Clayton and Christian."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1532048605911",
+      "conditions": "#GetGroupNames",
+      "dialog_node": "node_3_1612712479571",
+      "previous_sibling": "node_2_1532048731678"
+    },
+    {
+      "type": "standard",
+      "title": "GetProfessorName",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "The professor of this class is Rodrigo Sardinas."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_1_1532048605911",
+      "conditions": "#GetProfessorName",
+      "dialog_node": "node_3_1612712486455",
+      "previous_sibling": "node_3_1612712479571"
+    },
+    {
+      "type": "standard",
+      "title": "Quit",
+      "output": {
+        "text": {
+          "values": [
+            "Thank you. Good bye."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "metadata": {},
+      "conditions": "#End",
+      "dialog_node": "node_46_1530315654027",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "Welcome",
+      "metadata": {},
+      "variable": "$greeted",
+      "dialog_node": "slot_28_1530313135395"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "text": {
+          "values": [
+            "Ask me any question about your class."
+          ],
+          "selection_policy": "sequential"
+        }
+      },
+      "context": {},
+      "metadata": {
+        "fallback": "leave"
+      },
+      "conditions": "#Welcome",
+      "digress_in": "not_available",
+      "dialog_node": "Welcome",
+      "digress_out": "allow_all"
+    }
+  ],
+  "counterexamples": [],
+  "learning_opt_out": false,
+  "name": "alexa-ibm",
+  "language": "en",
+  "description": "A demo chat to request class information."
+}
